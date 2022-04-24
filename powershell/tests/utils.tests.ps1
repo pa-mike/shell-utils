@@ -75,27 +75,55 @@ Describe "Timestamp-Echo" {
   
 Describe "InstallModule-Check" {
 
-    Context "if the module exists" {
-        BeforeEach {
-            Mock Get-Module { return $true }
-            Mock Timestamp-Echo 
-            $result = InstallModule-Check Example 1.0.1
+    Context "Module Version Supplied" {
+
+        Context "if the module exists" {
+            BeforeEach {
+                Mock Get-Module { return $true }
+                Mock Timestamp-Echo 
+                $result = InstallModule-Check Example 1.0.1
+            }
+            It "it should return Already Installed" {
+                $result | Should -Be "Already Installed"
+            }
         }
-        It "it should return Already Installed" {
-            $result | Should -Be "Already Installed"
+        Context "if the module doesnt exist" { 
+            BeforeEach {
+                Mock Install-Module { return $true }
+                Mock Timestamp-Echo 
+                $result = InstallModule-Check Example 1.0.1
+            }
+            It "it should install it" {
+                $result | Should -Be $true
+            }
+            It "should use Install-Module" {
+                Should -Invoke Install-Module -Times 1 -Exactly
+            }
         }
     }
-    Context "if the module doesnt exist" { 
-        BeforeEach {
-            Mock Install-Module { return $true }
-            Mock Timestamp-Echo 
-            $result = InstallModule-Check Example 1.0.1
+    Context "No Module Version" {
+        Context "if the module exists" {
+            BeforeEach {
+                Mock Get-Module { return $true }
+                Mock Timestamp-Echo 
+                $result = InstallModule-Check Example
+            }
+            It "it should return Already Installed" {
+                $result | Should -Be "Already Installed"
+            }
         }
-        It "it should install it" {
-            $result | Should -Be $true
-        }
-        It "should use Install-Module" {
-            Should -Invoke Install-Module -Times 1 -Exactly
+        Context "if the module doesnt exist" { 
+            BeforeEach {
+                Mock Install-Module { return $true }
+                Mock Timestamp-Echo 
+                $result = InstallModule-Check Example
+            }
+            It "it should install it" {
+                $result | Should -Be $true
+            }
+            It "should use Install-Module" {
+                Should -Invoke Install-Module -Times 1 -Exactly
+            }
         }
     }
 }
@@ -106,14 +134,14 @@ Describe "Add-LineToProfile" {
     }
     Context "Profile Contains Line" {
         BeforeEach {
-            
+            Mock Timestamp-Echo
             Mock Select-String { return $example_line }
             Mock Add-Content
             # Mock profile { return "example profile" }
-            $result = $(Add-LineToProfile $example_line $profile)6>&1 
+            $result = $(Add-LineToProfile $example_line)6>&1 
         }
         It "Should echo line already set" {
-            [bool]($result -match "Powershell Profile $example_line already set, skipping" )  | Should -Be $true 
+            Should -Invoke Timestamp-Echo -Times 1 -Exactly
         }
         It "Shouldn't add a line to profile" {
             Should -Invoke -CommandName Add-Content -Times 0
@@ -121,13 +149,14 @@ Describe "Add-LineToProfile" {
     }
     Context "Profile does not contain Line" {
         BeforeEach {
+            Mock Timestamp-Echo
             Mock Select-String { return $null }
             Mock Add-Content
             # Mock profile { return "example profile" }
-            $result = $(Add-LineToProfile $example_line $profile)6>&1 
+            $result = $(Add-LineToProfile $example_line)6>&1 
         }
         It "Should echo line already set" {
-            [bool]($result -match "Setting Powershell Profile $example_line" )  | Should -Be $true 
+            Should -Invoke Timestamp-Echo -Times 1 -Exactly
         }
         It "Shouldn't add a line to profile" {
             Should -Invoke Add-Content -Times 1 -Exactly

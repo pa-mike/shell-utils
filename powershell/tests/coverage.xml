@@ -1,67 +1,69 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE report PUBLIC "-//JACOCO//DTD Report 1.1//EN" "report.dtd"[]>
-<report name="Pester (04/24/2022 14:15:00)">
-  <sessioninfo id="this" start="1650809699869" dump="1650809700191" />
+<report name="Pester (04/24/2022 14:42:57)">
+  <sessioninfo id="this" start="1650811377074" dump="1650811377518" />
   <package name="src">
     <class name="src/utils" sourcefilename="utils.ps1">
-      <method name="Timestamp-Echo" desc="()" line="8">
+      <method name="Timestamp-Echo" desc="()" line="3">
         <counter type="INSTRUCTION" missed="0" covered="20" />
-        <counter type="LINE" missed="0" covered="15" />
+        <counter type="LINE" missed="0" covered="13" />
         <counter type="METHOD" missed="0" covered="1" />
       </method>
-      <method name="Add-LineToProfile" desc="()" line="40">
-        <counter type="INSTRUCTION" missed="1" covered="4" />
-        <counter type="LINE" missed="1" covered="3" />
+      <method name="Add-LineToProfile" desc="()" line="25">
+        <counter type="INSTRUCTION" missed="0" covered="5" />
+        <counter type="LINE" missed="0" covered="4" />
         <counter type="METHOD" missed="0" covered="1" />
       </method>
-      <method name="InstallModule-Check" desc="()" line="51">
-        <counter type="INSTRUCTION" missed="0" covered="7" />
-        <counter type="LINE" missed="0" covered="6" />
+      <method name="InstallModule-Check" desc="()" line="36">
+        <counter type="INSTRUCTION" missed="0" covered="12" />
+        <counter type="LINE" missed="0" covered="10" />
         <counter type="METHOD" missed="0" covered="1" />
       </method>
-      <counter type="INSTRUCTION" missed="1" covered="31" />
-      <counter type="LINE" missed="1" covered="24" />
+      <counter type="INSTRUCTION" missed="0" covered="37" />
+      <counter type="LINE" missed="0" covered="27" />
       <counter type="METHOD" missed="0" covered="3" />
       <counter type="CLASS" missed="0" covered="1" />
     </class>
     <sourcefile name="utils.ps1">
+      <line nr="3" mi="0" ci="2" mb="0" cb="0" />
+      <line nr="4" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="6" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="7" mi="0" ci="2" mb="0" cb="0" />
       <line nr="8" mi="0" ci="2" mb="0" cb="0" />
-      <line nr="9" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="9" mi="0" ci="3" mb="0" cb="0" />
+      <line nr="10" mi="0" ci="3" mb="0" cb="0" />
       <line nr="11" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="12" mi="0" ci="2" mb="0" cb="0" />
-      <line nr="14" mi="0" ci="2" mb="0" cb="0" />
-      <line nr="19" mi="0" ci="3" mb="0" cb="0" />
+      <line nr="12" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="13" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="18" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="19" mi="0" ci="1" mb="0" cb="0" />
       <line nr="20" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="21" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="24" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="25" mi="0" ci="2" mb="0" cb="0" />
       <line nr="26" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="27" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="28" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="33" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="34" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="35" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="40" mi="0" ci="2" mb="0" cb="0" />
+      <line nr="29" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="30" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="36" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="37" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="38" mi="0" ci="1" mb="0" cb="0" />
       <line nr="41" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="42" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="43" mi="0" ci="2" mb="0" cb="0" />
       <line nr="44" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="45" mi="1" ci="0" mb="0" cb="0" />
-      <line nr="51" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="52" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="53" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="56" mi="0" ci="1" mb="0" cb="0" />
-      <line nr="57" mi="0" ci="2" mb="0" cb="0" />
-      <line nr="58" mi="0" ci="1" mb="0" cb="0" />
-      <counter type="INSTRUCTION" missed="1" covered="31" />
-      <counter type="LINE" missed="1" covered="24" />
+      <line nr="47" mi="0" ci="1" mb="0" cb="0" />
+      <line nr="48" mi="0" ci="2" mb="0" cb="0" />
+      <line nr="49" mi="0" ci="1" mb="0" cb="0" />
+      <counter type="INSTRUCTION" missed="0" covered="37" />
+      <counter type="LINE" missed="0" covered="27" />
       <counter type="METHOD" missed="0" covered="3" />
       <counter type="CLASS" missed="0" covered="1" />
     </sourcefile>
-    <counter type="INSTRUCTION" missed="1" covered="31" />
-    <counter type="LINE" missed="1" covered="24" />
+    <counter type="INSTRUCTION" missed="0" covered="37" />
+    <counter type="LINE" missed="0" covered="27" />
     <counter type="METHOD" missed="0" covered="3" />
     <counter type="CLASS" missed="0" covered="1" />
   </package>
-  <counter type="INSTRUCTION" missed="1" covered="31" />
-  <counter type="LINE" missed="1" covered="24" />
+  <counter type="INSTRUCTION" missed="0" covered="37" />
+  <counter type="LINE" missed="0" covered="27" />
   <counter type="METHOD" missed="0" covered="3" />
   <counter type="CLASS" missed="0" covered="1" />
 </report>
