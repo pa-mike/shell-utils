@@ -138,7 +138,7 @@ Describe "Add-LineToProfile" {
             Mock Select-String { return $example_line }
             Mock Add-Content
             # Mock profile { return "example profile" }
-            $result = $(Add-LineToProfile $example_line)6>&1 
+            $result = $(Add-LineToProfile $example_line "test_profile_path_string")6>&1 
         }
         It "Should echo line already set" {
             Should -Invoke Timestamp-Echo -Times 1 -Exactly
@@ -153,7 +153,7 @@ Describe "Add-LineToProfile" {
             Mock Select-String { return $null }
             Mock Add-Content
             # Mock profile { return "example profile" }
-            $result = $(Add-LineToProfile $example_line)6>&1 
+            $result = $(Add-LineToProfile $example_line "test_profile_path_string")6>&1 
         }
         It "Should echo line already set" {
             Should -Invoke Timestamp-Echo -Times 1 -Exactly

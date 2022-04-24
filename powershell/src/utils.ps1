@@ -4,8 +4,13 @@ function Timestamp-Echo([string]$text, [string]$headerColor = "Green", [bool]$ca
     if ($callStack -eq $true -and $PScallStack.Count -ne 0 -and $PScallStack.Length -gt 1 -and "<No file>" -ne $PScallStack.ScriptName[0]) {
         # Call stack not null
         [array]::Reverse($PScallStack)
-        $scripts = $PScallStack[0..($PScallStack.Length - 2)].ScriptName # Get all but the last item in our call stack, ie, this utils script function invocation
-        $commandPath = (split-path $scripts -Leaf ) -join " > "
+        $commandArr = @()
+        Foreach ($i in $PScallStack[0..($PScallStack.Length -2)].ScriptName) { # Get all but the last item in our call stack, ie, this utils script function invocation
+            if ($null -ne $i ) {
+                $commandArr = $commandArr + (split-path $i -Leaf )
+            }
+        }
+        $commandPath = $commandArr -join " > "
         $functionPath = ($(Get-PSCallStack)[1].FunctionName) -join " ~ "
         if ($functionPath -eq "<ScriptBlock>") { $functionString = " - " }else { $functionString = " ~ $functionPath - " }
         $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss.fff"
@@ -21,15 +26,15 @@ function Timestamp-Echo([string]$text, [string]$headerColor = "Green", [bool]$ca
     }
 }
 
-function Add-LineToProfile([string]$line) {
+function Add-LineToProfile([string]$line, $profile_path = $profile) {
     $line_pattern = "^$($line -replace '[[+*?()\\.]','\$&')$" # escape strings
     # $line_pattern = "^$line_pattern$"
-    IF ($null -ne $(Select-String -Path $profile -Pattern $line_pattern) ) {
+    IF ($null -ne $(Select-String -Path $profile_path -Pattern $line_pattern) ) {
         Timestamp-Echo "Powershell Profile $line already set, skipping" 
     }
     else {
         Timestamp-Echo "Setting Powershell Profile $line" 
-        Add-Content -Path $profile -Value "
+        Add-Content -Path $profile_path -Value "
 $line"
     }
 }
