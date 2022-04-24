@@ -1,0 +1,254 @@
+class:
+    object:
+        instance:
+            method:
+                params:
+                    executables
+
+components:
+    tools:
+        exampletool:
+            brew:
+                source:
+                    cask
+                args:
+                    argstring
+                pkg:   
+                    id
+            winget:
+                source:
+                    cask
+                args:
+                    argstring
+                pkg:   
+                    id
+            apt:
+                args:
+                    argstring
+                pkg:   
+                    id
+            apt-get:
+                args:
+                    argstring
+                pkg:   
+                    id
+            bash:
+                script:
+                    scriptname.sh
+                args:
+                    argstring
+            powershell:
+                script:
+                    scriptname.ps1
+                args:
+                    argstring
+        chrome:
+            brew:
+                cask;google-chrome
+            winget:
+                winget;Google.Chrome
+        notion:
+            brew:
+                cask;notion
+            winget:
+                winget;Notion.Notion
+        googledrive:
+            brew:
+                cask;google-drive
+            winget:
+                winget;Google.BackupAndSync
+        miro:
+            brew:
+                cask;miro
+            winget:
+                winget;Miro.Miro
+        vlc:
+            brew:
+                cask;vlc
+            winget:
+                winget;VideoLAN.VLC
+        everything:
+            brew:
+                cask;easyfind
+            winget:      
+                winget;voidtools.Everything
+        windowmanager:
+            brew:
+                cask;bettertouchtool
+            winget:
+                winget;Microsoft.PowerToys
+        sevenzip:
+            brew:
+                formulae;sevenzip
+            winget:
+                winget;7zip.7zip
+        plaintxteditor:
+            brew:
+                cask;coteditor
+            winget:
+                winget;Notepad++.Notepad++
+        dirstat:
+            brew:
+                cask;disk-inventory-x
+            winget:
+                winget;WinDirStat.WinDirStat
+        sejdapdf:
+            brew:
+                cask;sejda-pdf
+            winget:
+                winget;Sejda.PDFDesktop
+        onedrive:
+            brew:
+                cask;onedrive
+            winget:    
+                winget;Microsoft.OneDrive
+        office:
+            brew:
+                cask;microsoft-office
+            winget:
+                winget;Microsoft.officedeploymenttool
+        zoom:
+            brew:
+                cask;zoom
+            winget:
+                winget;Zoom.Zoom
+        vscode:
+            brew:
+                cask;visual-studio-code
+            winget:
+                winget;Microsoft.VisualStudioCode  
+        docker:
+            brew:
+                cask;docker
+            winget:
+                winget;Docker.DockerDesktop
+        git:
+            brew:
+                formulae;git
+            winget:
+                winget;Git.Git
+        github:
+            brew:
+                cask;github
+            winget:
+                winget;GitHub.GitHubDesktop
+        ssh:
+            winget:
+                winget;PuTTY.PuTTY
+        dbeaverce:
+            brew:
+                cask;dbeaver-community
+            winget:
+                winget;dbeaver.dbeaver
+        azurecli:
+            brew:
+                formulae;azure-cli
+            winget:
+                winget;Microsoft.AzureCLI
+        azurestorage:
+            brew:
+                cask;microsoft-azure-storage-explorer
+            winget:
+                winget;Microsoft.AzureStorageExplorer
+        postman:
+            brew:
+                cask;postman
+            winget:
+                winget;Postman.Postman
+        python:
+            bash:
+                install-python.sh
+            winget:
+                winget;Python.Python.3
+        conda:
+            bash:
+                install-conda.sh
+        curl:
+            apt-get:
+                curl
+        openjdk11:
+            apt-get:
+                openjdk-11-jdk
+        maven:
+            apt-get:
+                maven
+        devenv:
+            bash:
+                devenv.sh
+            powershell:
+                devenv.ps1  
+    utilities:
+        open-here-shell:
+            regedit:
+                open-here.reg
+    ide-extensions:
+        vscode:
+            pa-data-team.vsix
+stages:
+    base:
+        tools:
+            - chrome
+            - notion
+            - googledrive
+            - miro
+            - python
+    qol:
+        tools:
+            - vlc
+            - everything
+            - windowmanager
+            - sevenzip
+            - plaintxteditor
+            - dirstat
+            - sejdapdf
+    business:
+        tools:
+            - onedrive
+            - office
+            - zoom
+    devbase:
+        tools:
+            - vscode
+            - docker
+            - git
+            - github
+            - ssh
+            - azurecli
+            - postman
+            - devenv
+        utilites:
+            - open-here-shell
+        devenv:
+            - python
+            - conda
+            - openjdk11
+            - maven
+    data:
+        tools:
+            - dbeaverce
+            - azurestorage
+            - conda
+        devenv:
+            - conda
+            - python
+        ide-extensions:
+            - pa-data-team.vsix
+flows:
+    business:
+        - base
+        - qol
+        - business
+    data:
+        - base
+        - qol
+        - devbase
+        - data
+    dev:
+        - base
+        - qol
+        - devbase
+        - dev
+
+    
+
+            

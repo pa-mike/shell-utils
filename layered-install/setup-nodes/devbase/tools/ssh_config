@@ -1,0 +1,53 @@
+# Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+
+Host Uat
+    HostName uat.provision.io
+    IdentityFile ~/.ssh/id_rsa
+    # LocalForward localhost:localPort localhost:remotePort
+    ## Artemis
+    LocalForward localhost:8164 localhost:8161
+    ## OrientDb
+    LocalForward localhost:2481 demo-trial-db-001:2481
+    ## Mariadb
+    LocalForward localhost:3307 demo-trial-manager-001:3306
+    User uname
+
+Host Swarm
+    HostName swarm.provision.io
+    IdentityFile ~/.ssh/id_rsa
+
+      ## uat
+    LocalForward localhost:2423 demo-trial-db-001:2424
+    LocalForward localhost:2479 demo-trial-db-001:2480
+
+    ## demo
+    LocalForward localhost:2425 demo-trial-db-001:2425
+    LocalForward localhost:2481 demo-trial-db-001:2481
+
+    ## pilot
+    LocalForward localhost:2426 demo-trial-db-001:2426
+    LocalForward localhost:2482 demo-trial-db-001:2482
+
+    ## trial
+    LocalForward localhost:2427 demo-trial-db-001:2427
+    LocalForward localhost:2483 demo-trial-db-001:2483
+
+    # prod
+    LocalForward localhost:2428 demo-trial-db-001:2428
+    LocalForward localhost:2484 demo-trial-db-001:2484
+
+    User uname
+
+Host datateam
+    HostName 20.63.99.63
+    IdentityFile ~/.ssh/id_rsa
+    LocalForward localhost:63730 localhost:81
+    LocalForward localhost:8088 localhost:8088
+    LocalForward localhost:8081 localhost:8080
+    LocalForward localhost:9005 localhost:9000
+    LocalForward localhost:8010 localhost:8010
+    User uname
+
+Host git
+    HostName github.com
+    IdentityFile ~/.ssh/michael-nc6-openssh

@@ -1,0 +1,447 @@
+
+valid:
+    structure:
+        objects:
+            flow:
+                stage:
+                    group:
+                        component:
+                            method:
+                                params: 
+                                    required: bool
+                                    default: str
+                                call: str
+    component_types:
+        - ide-extensions
+        - tools
+        - utilities
+        - devenv
+methods:
+    apt:
+        params:
+            args:
+                required: False
+            pkg:
+                required:  True
+        call: sudo apt install {pkg} -y {args}
+    apt-get:
+        params:
+            args:
+                required: False
+            pkg:
+                required:  True
+        call: sudo apt-get install {pkg} -y {args}
+    bash:
+        params:
+            args:
+                required: False
+            source:
+                required:  True
+        call: bash -c {source} {args}
+    bash-command:
+        params:
+            args:
+                required: True
+        call: PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command {args}
+    brew:
+        params:
+            args:
+                required: False
+            source:
+                required:  False
+            pkg:
+                required: True
+        call: brew install {source} {pkg} -y {args}
+    powershell:
+        params:
+            args:
+                required: False
+            source:
+                required:  True
+        call: PowerShell.exe -NoProfile -ExecutionPolicy Bypass -File {source} {args}
+    powershell-command:
+        params:
+            args:
+                required: True
+        call: PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command {args}
+    winget:
+        params:
+            args:
+                required: False
+            source:
+                required:  False
+                default: --source winget
+            pkg:
+                required: True
+        call: winget install {pkg} {source} {args}
+    vs-extension-local:
+        params:
+            source:
+                required:  True
+        call: code --install-extension {source}
+    regedit:
+        params:
+            source:
+                required:  True
+        call: reg import {source}
+    wsl:
+        params:
+            args:
+                required: True
+        call: wsl {args}
+    # compound-command:
+    #     params:
+    #         componentA:
+    #             required: True
+    #         componentB:
+    #             required: True
+    #         argsA:
+    #             required: False
+    #         argsB:
+    #             required: False
+    #         call: "{componentA} {componentB}"
+            
+os_methods: 
+    macos:
+        - apt
+        - apt-get
+        - bash
+        - bash-command
+        - brew
+        - vs-extension-local
+        # - compound-command
+    unix:
+        - apt
+        - apt-get
+        - bash
+        - bash-command
+        - brew
+        - vs-extension-local
+        # - compound-command
+    windows:
+        - powershell
+        - powershell-command
+        - wsl
+        - winget
+        - regedit
+        - vs-extension-local
+        - wsl
+
+        # - compound-command
+
+components:
+    ide-extensions:
+        vscode-data:
+            powershell-command:
+                args: code --install-extension pa-data-team.vsix; wsl -d $distro -u root -e bash pa-data-team.vsix
+            vs-extension-local:
+                source: code --install-extension pa-data-team.vsix
+    devenv:   
+        python:
+            bash:
+                source: install-python.sh
+            wsl:
+                args: -e component(devenv, python, bash)
+        conda:
+            bash:
+                source: install-conda.sh
+            wsl:
+                args: -e component(devenv, conda, bash)
+        maven:
+            apt-get:
+                pkg: maven
+            wsl:
+                args: -e component(devenv, maven, apt-get)
+        openjdk11:
+            apt-get:
+                pkg: openjdk-11-jdk
+            wsl:
+                args: -e component(devenv, openjdk11, apt-get)
+        oraclejava8:
+            bash:
+                source: install-oraclejava8.sh
+            wsl:
+                args: -e component(devenv, oraclejava8, bash)
+        
+    tools:
+        python:
+            bash:
+                source: install-python.sh
+            winget:
+                pkg: Python.Python.3
+                source: --source winget
+        azurecli:
+            brew:
+                pkg: azure-cli
+
+            winget:
+                pkg: Microsoft.AzureCLI
+                source: --source winget
+        azurestorage:
+            brew:
+                pkg: microsoft-azure-storage-explorer
+                source: --cask
+            winget:
+                pkg: Microsoft.AzureStorageExplorer
+                source: --source winget
+        chrome:
+            brew:
+                pkg: google-chrome
+                source: --cask
+            winget:
+                pkg: Google.Chrome
+                source: --source winget
+        curl:
+            apt-get:
+                pkg: curl
+        dbeaverce:
+            brew:
+                pkg: dbeaver-community
+                source: --cask
+            winget:
+                pkg: dbeaver.dbeaver
+                source: --source winget
+        wsl-setup:
+            powershell:
+                source: wsl-setup.ps1
+        devenv:
+            bash:
+                source: devenv.sh
+            wsl:
+                args: -e component(tools, devenv, bash)
+        dirstat:
+            brew:
+                pkg: disk-inventory-x
+                source: --cask
+            winget:
+                pkg: WinDirStat.WinDirStat
+                source: --source winget
+        docker:
+            brew:
+                pkg: docker
+                source: --cask
+            winget:
+                pkg: Docker.DockerDesktop
+                source: --source winget
+        everything:
+            brew:
+                pkg: easyfind
+                source: --cask
+            winget:
+                pkg: voidtools.Everything
+                source: --source winget
+        git:
+            brew:
+                pkg: git
+
+            winget:
+                pkg: Git.Git
+                source: --source winget
+        github:
+            brew:
+                pkg: github
+                source: --cask
+            winget:
+                pkg: GitHub.GitHubDesktop
+                source: --source winget
+        googledrive:
+            brew:
+                pkg: google-drive
+                source: --cask
+            winget:
+                pkg: Google.BackupAndSync
+                source: --source winget
+        miro:
+            brew:
+                pkg: miro
+                source: --cask
+            winget:
+                pkg: Miro.Miro
+                source: --source winget
+        notion:
+            brew:
+                pkg: notion
+                source: --cask
+            winget:
+                pkg: Notion.Notion
+                source: --source winget
+        office:
+            brew:
+                pkg: microsoft-office
+                source: --cask
+            winget:
+                pkg: Microsoft.officedeploymenttool
+                source: --source winget
+        onedrive:
+            brew:
+                pkg: onedrive
+                source: --cask
+            winget:
+                pkg: Microsoft.OneDrive
+                source: --source winget
+        plaintxteditor:
+            brew:
+                pkg: coteditor
+                source: --cask
+            winget:
+                pkg: Notepad++.Notepad++
+                source: --source winget
+        postman:
+            brew:
+                pkg: postman
+                source: --cask
+            winget:
+                pkg: Postman.Postman
+                source: --source winget
+        python:
+            bash:
+                source: install-python.sh
+            winget:
+                pkg: Python.Python.3
+                source: --source winget
+        sejdapdf:
+            brew:
+                pkg: sejda-pdf
+                source: --cask
+            winget:
+                pkg: Sejda.PDFDesktop
+                source: --source winget
+        sevenzip:
+            brew:
+                pkg: sevenzip
+
+            winget:
+                pkg: 7zip.7zip
+                source: --source winget
+        ssh:
+            winget:
+                pkg: PuTTY.PuTTY
+                source: --source winget
+        vlc:
+            brew:
+                pkg: vlc
+                source: --cask
+            winget:
+                pkg: VideoLAN.VLC
+                source: --source winget
+        vscode:
+            brew:
+                pkg: visual-studio-code
+                source: --cask
+            winget:
+                pkg: Microsoft.VisualStudioCode
+                source: --source winget
+        windowmanager:
+            brew:
+                pkg: bettertouchtool
+                source: --cask
+            winget:
+                pkg: Microsoft.PowerToys
+                source: --source winget
+        zoom:
+            brew:
+                pkg: zoom
+                source: --cask
+            winget:
+                pkg: Zoom.Zoom
+                source: --source winget
+        restart-source:
+            bash:
+                source: restart-source.sh
+            powershell:
+                source: restart-source.ps1
+    utilities:
+        open-here-shell:
+            regedit:
+                source: open-here.reg
+flows:
+    business:
+        - base
+        - qol
+        - business
+    data:
+        - base
+        - qol
+        - devbase
+        - data
+    dev:
+        - base
+        - qol
+        - devbase
+        - dev
+stages:
+    base:
+        tools:
+            - restart-source
+            - chrome
+            - notion
+            - googledrive
+            - miro
+    business:
+        tools:
+            - onedrive
+            - office
+            - zoom
+    data:
+        ide-extensions:
+            - vscode-data
+        tools:
+            - dbeaverce
+            - azurestorage
+        devenv:
+            - oraclejava8
+    devbase:
+        tools:
+            - vscode
+            - docker
+            - git
+            - github
+            - ssh
+            - azurecli
+            - postman
+            - wsl-setup
+            - devenv
+        devenv:
+            - python
+            - conda
+            - openjdk11
+            - maven
+        utilities:
+            - open-here-shell
+    qol:
+        tools:
+            - vlc
+            - everything
+            - windowmanager
+            - sevenzip
+            - plaintxteditor
+            - dirstat
+            - sejdapdf
+    dev:
+        ide-extensions:
+            - vscode-data
+        tools:
+            - dbeaverce
+            - azurestorage
+wsldistros:
+    Ubuntu-20.04:
+        distroExecutableName: ubuntu2004
+        distroUrl: https://aka.ms/wslubuntu2004
+    Ubuntu-18.04:
+        distroExecutableName: ubuntu1804
+        distroUrl: https://aka.ms/wsl-ubuntu-1804
+    Ubuntu-16.04:
+        distroExecutableName: ubuntu1604
+        distroUrl: https://aka.ms/wsl-ubuntu-1604
+    Debian:
+        distroExecutableName: debian
+        distroUrl: https://aka.ms/wsl-debian-gnulinux
+    kali-linux:
+        distroExecutableName: kali
+        distroUrl: https://aka.ms/wsl-kali-linux-new
+    SLES-12:
+        distroExecutableName: SLES-12
+        distroUrl: https://aka.ms/wsl-sles-12
+    openSUSE-42:
+        distroExecutableName: openSUSE-Leap-15.2
+        distroUrl: https://aka.ms/wsl-opensuseleap15-2

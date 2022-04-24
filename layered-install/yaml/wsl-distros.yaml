@@ -1,0 +1,21 @@
+Ubuntu-20.04:
+    distroExecutableName: ubuntu2004
+    distroUrl: https://aka.ms/wslubuntu2004
+Ubuntu-18.04:
+    distroExecutableName: ubuntu1804
+    distroUrl: https://aka.ms/wsl-ubuntu-1804
+Ubuntu-16.04:
+    distroExecutableName: ubuntu1604
+    distroUrl: https://aka.ms/wsl-ubuntu-1604
+Debian:
+    distroExecutableName: debian
+    distroUrl: https://aka.ms/wsl-debian-gnulinux
+kali-linux:
+    distroExecutableName: kali
+    distroUrl: https://aka.ms/wsl-kali-linux-new
+SLES-12:
+    distroExecutableName: SLES-12
+    distroUrl: https://aka.ms/wsl-sles-12
+openSUSE-42:
+    distroExecutableName: openSUSE-Leap-15.2
+    distroUrl: https://aka.ms/wsl-opensuseleap15-2
