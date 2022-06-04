@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 # Set ANSI Escape Codes for Text Coloring
 
 green='\033[0;32m'

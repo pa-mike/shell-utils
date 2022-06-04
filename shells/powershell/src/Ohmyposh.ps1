@@ -25,4 +25,4 @@ elseif ($IsWindows -or $env:OS) {
     $path_char = "\"
 }
 
-Add-LineToProfile "(@(oh-my-posh init pwsh --config=`"$((Split-Path (Split-Path (Split-Path $PSCommandPath -Parent) -Parent ) -Parent ))$($path_char)ohmyposh$($path_char)ohmyposh-config.json`" --print) -join `"``n`") `| Invoke-Expression"
+Add-LineToProfile "(@(oh-my-posh init pwsh --config=`"$((Split-Path $PSCommandPath -Parent))$($path_char)ohmyposh$($path_char)ohmyposh-config.json`" --print) -join `"``n`") `| Invoke-Expression"
