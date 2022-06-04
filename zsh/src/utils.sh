@@ -42,7 +42,11 @@ truncate_string(){
 
 add_unique_line_to_file(){
 
-    if grep -zoq -F "\b$1\b" "$2"; then
+    if [ "$3" == "force" ]; then
+        action_echo "Adding line ${variable_color}'$(truncate_string "$1")'${no_color} to ${variable_color}'$(truncate_string $2)'${no_color}"
+        echo "
+$1" >> $2
+    elif grep -zoq -F "\b$1\b" "$2"; then
         skipping_echo "Found existing line ${variable_color}'$(truncate_string "$1")'${no_color} in ${variable_color}'$(truncate_string $2)'${no_color}"
     else
         action_echo "Adding line ${variable_color}'$(truncate_string "$1")'${no_color} to ${variable_color}'$(truncate_string $2)'${no_color}"
