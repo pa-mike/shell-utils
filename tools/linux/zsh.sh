@@ -9,3 +9,4 @@ sudo apt install zsh -y
 
 source "$(dirname "$0")/../../shells/zsh/src/ohmyposh.sh"
 source "$(dirname "$0")/../../shells/zsh/src/zsh-autosuggestions.sh"
+source "$(dirname "$0")/../../shells/zsh/src/command-not-found.sh"
