@@ -99,5 +99,8 @@ brew install --cask microsoft-azure-storage-explorer
 action_echo "Installing java"
 brew install java
 
+action_echo "Installing npm"
+brew install node
+
 action_echo "Installing Spotica Menu"
 mas install 570549457
